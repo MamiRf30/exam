@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Accueil | Générateur de Quiz{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Paramètres du quiz</h2>
+  <form method="post" action="{{ url_for('generate') }}" class="form-grid">
+    <label for="theme">Thème du quiz</label>
+    <input id="theme" name="theme" type="text" placeholder="Ex: Réseaux informatiques" required>
+
+    <label for="num_questions">Nombre de questions (3 à 10)</label>
+    <input id="num_questions" name="num_questions" type="number" min="3" max="10" value="5" required>
+
+    <label for="difficulty">Niveau</label>
+    <select id="difficulty" name="difficulty" required>
+      <option value="Facile">Facile</option>
+      <option value="Moyen" selected>Moyen</option>
+      <option value="Difficile">Difficile</option>
+    </select>
+
+    <button type="submit" class="btn">Générer le quiz</button>
+  </form>
+</section>
+{% endblock %}

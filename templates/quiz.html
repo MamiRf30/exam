@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Quiz | {{ meta.theme }}{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Thème: {{ meta.theme }}</h2>
+  <p>Difficulté: <strong>{{ meta.difficulty }}</strong></p>
+
+  <form method="post" action="{{ url_for('result') }}">
+    {% for question in questions %}
+      <article class="question-block">
+        <h3>Question {{ loop.index }}: {{ question.question }}</h3>
+        {% for key, value in question.options.items() %}
+          <label class="option-line">
+            <input type="radio" name="q_{{ loop.parent.index0 }}" value="{{ key }}" required>
+            <span><strong>{{ key }}.</strong> {{ value }}</span>
+          </label>
+        {% endfor %}
+      </article>
+    {% endfor %}
+
+    <button type="submit" class="btn">Valider</button>
+  </form>
+</section>
+{% endblock %}
