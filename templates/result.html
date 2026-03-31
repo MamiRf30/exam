@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Résultat | Quiz{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Résultat final</h2>
+  <p class="score">Score: {{ score }}/{{ total }}</p>
+  <p>Thème: <strong>{{ meta.theme }}</strong> | Difficulté: <strong>{{ meta.difficulty }}</strong></p>
+</section>
+
+<section class="card">
+  <h2>Détail des réponses</h2>
+  {% for item in results %}
+    <article class="result-block {% if item.is_correct %}ok{% else %}ko{% endif %}">
+      <h3>Question {{ loop.index }}: {{ item.question }}</h3>
+      <p>Votre réponse:
+        {% if item.user_answer %}
+          <strong>{{ item.user_answer }}. {{ item.options[item.user_answer] }}</strong>
+        {% else %}
+          <strong>Non répondu</strong>
+        {% endif %}
+      </p>
+      <p>Bonne réponse: <strong>{{ item.correct_answer }}. {{ item.options[item.correct_answer] }}</strong></p>
+    </article>
+  {% endfor %}
+
+  <a href="{{ url_for('index') }}" class="btn">Recommencer</a>
+</section>
+{% endblock %}
